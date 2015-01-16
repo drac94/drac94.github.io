@@ -9,7 +9,7 @@ Mi nombre es José Luis, soy mexicano y soy desarrollador de software especializ
 
 ## ¿En español?
 
-Sí, aunque considero el idioma inglés como un requisito indispensable para llegar más lejos, no sólo profesional sino personalmente, en mi experiencia, hay un rezago importante de documentación en español, es así que casi el 100% del contenido de esta página será en este idioma.
+Sí, aunque considero el idioma inglés como un requisito indispensable para llegar más lejos, no sólo profesional sino personalmente, en mi experiencia, hay un rezago importante de documentación en español, es así que el 99% del contenido de esta página será en este idioma.
 
 Anyway, as I was saying... broma, broma.
 
