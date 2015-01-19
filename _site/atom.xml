@@ -4,7 +4,7 @@
  <title>José Luis Hernández</title>
  <link href="http://joseluishernandez.me/atom.xml" rel="self"/>
  <link href="http://joseluishernandez.me/"/>
- <updated>2015-01-16T11:51:44-06:00</updated>
+ <updated>2015-01-19T16:45:11-06:00</updated>
  <id>http://joseluishernandez.me</id>
  <author>
    <name>Mark Otto</name>
@@ -13,10 +13,27 @@
 
  
  <entry>
+   <title>Gradle por favor</title>
+   <link href="http://joseluishernandez.me/2015/01/19/gradle-please/"/>
+   <updated>2015-01-19T00:00:00-06:00</updated>
+   <id>http://joseluishernandez.me/2015/01/19/gradle-please</id>
+   <content type="html">&lt;h2&gt;Gradle Please&lt;/h2&gt;
+
+&lt;p&gt;Si eres un desarrollador de Android o Java, usas Gradle (deberías) y quieres agregar una dependencia a tu proyecto pero no sabes el nombre calificado de esta, la siguiente herramienta es para ti.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://gradleplease.appspot.com/&quot;&gt;Gradle Please&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Usando el repositorio de Maven, con solo poner el nombre de la librería que queremos agregar nos da la línea que necesitamos incluir en nuestro archivo de configuración de Gradle, así de fácil.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/example_gradleplease.png&quot; alt=&quot;placeholder&quot; title=&quot;Example&quot;&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>Bienvenid@</title>
-   <link href="http://joseluishernandez.me/2014/01/16/primer-entrada/"/>
-   <updated>2014-01-16T00:00:00-06:00</updated>
-   <id>http://joseluishernandez.me/2014/01/16/primer-entrada</id>
+   <link href="http://joseluishernandez.me/2015/01/16/primer-entrada/"/>
+   <updated>2015-01-16T00:00:00-06:00</updated>
+   <id>http://joseluishernandez.me/2015/01/16/primer-entrada</id>
    <content type="html">&lt;h2&gt;¿De qué va esto?&lt;/h2&gt;
 
 &lt;p&gt;Mi nombre es José Luis, soy mexicano y soy desarrollador de software especializado en web y dispositivos móviles. Aquí encontrarás una pequeña muestra de lo que hago día con día y que amo hacer, desarrollar soluciones basadas en software.&lt;/p&gt;
