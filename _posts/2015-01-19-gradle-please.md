@@ -3,8 +3,6 @@ layout: post
 title: Gradle por favor  
 ---
 
-## Gradle Please
-
 Si eres un desarrollador de Android o Java, usas Gradle (deberías) y quieres agregar una dependencia a tu proyecto pero no sabes el nombre calificado de esta, la siguiente herramienta es para ti.
 
 [Gradle Please](http://gradleplease.appspot.com/)
