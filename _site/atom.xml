@@ -4,7 +4,7 @@
  <title>José Luis Hernández</title>
  <link href="http://joseluishernandez.me/atom.xml" rel="self"/>
  <link href="http://joseluishernandez.me/"/>
- <updated>2015-01-19T16:45:11-06:00</updated>
+ <updated>2017-12-07T17:52:09-06:00</updated>
  <id>http://joseluishernandez.me</id>
  <author>
    <name>Mark Otto</name>
@@ -13,19 +13,95 @@
 
  
  <entry>
+   <title>This is a test</title>
+   <link href="http://joseluishernandez.me/2017/12/07/test/"/>
+   <updated>2017-12-07T00:00:00-06:00</updated>
+   <id>http://joseluishernandez.me/2017/12/07/test</id>
+   <content type="html">&lt;p&gt;test&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Pregunta de entrevista (Moviendo ceros)</title>
+   <link href="http://joseluishernandez.me/2016/06/15/zeros/"/>
+   <updated>2016-06-15T00:00:00-05:00</updated>
+   <id>http://joseluishernandez.me/2016/06/15/zeros</id>
+   <content type="html">&lt;p&gt;Hoy vamos a escribir una función que mueva los &lt;em&gt;0s&lt;/em&gt; de un array al principio del mismo, y que mantenga los demás valores sin importar el orden de estos.
+Esta es una pregunta real que me tocó resolver en alguna entrevista, como tip, les puedo decir que primero tratemos de resolverlo con la primera forma que se nos venga a la mente y de ahí lo vayamos optimizando.&lt;/p&gt;
+
+&lt;p&gt;Ejemplo:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[2,-12,0,7,0,-99] =&amp;gt; [0,0,2,-12,7,-99]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Nuestro arreglo final debería de tener 2 &lt;em&gt;0s&lt;/em&gt; al principio y los demas elementos al final, no importando el orden de estos.&lt;/p&gt;
+
+&lt;p&gt;Entonces la primer solución que podríamos implementar es crear otro arreglo, recorrer el arreglo original y por cada 0 que encontremos lo metemos en el arreglo nuevo, después volvemos a recorrer el arreglo original y los que no son &lt;em&gt;0s&lt;/em&gt;, los metemos después del índice en el que nos quedamos cuando metimos los &lt;em&gt;0s&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Esta solución si bien soluciona nuestro problema tiene una complejidad de tiempo de &lt;strong&gt;O(n)&lt;/strong&gt;, es decir, tenemos que recorrer el arreglo original 2 veces, y una complejidad de espacio de &lt;strong&gt;O(n)&lt;/strong&gt; también, porque tenemos que crear otro arreglo para guardar el resultado.&lt;/p&gt;
+
+&lt;p&gt;Pero puede que se de el caso de que nos pidan que la complejidad tanto en tiempo y espacio sea &lt;strong&gt;O(1)&lt;/strong&gt;, entonces tenemos que buscar otra solución.&lt;/p&gt;
+
+&lt;p&gt;Sabemos que el orden de los elementos que no sean &lt;em&gt;0s&lt;/em&gt; no importa, así que podemos recorrer el arreglo y cuando encontremos un 0, tenemos que intencambiarlo por el primer valor que no sea 0 empezando desde el principio del arreglo. En nuestro ejemplo, el primer 0 es el de la tercera posición, y el primer valor que no es 0 empezando desde el principio, es el primero, que es 2, entonces procedemos a intercambiarlos, lo que nos daría el siguiente arreglo &lt;code class=&quot;highlighter-rouge&quot;&gt;[0,-12,2,7,0,-99]&lt;/code&gt;, con esto sabemos que la posición en donde pusimos el 0 podemos omitirla cuando encontremos otro 0, para esto podemos usar una variable que nos sirva como puntero y que nos indique donde pusimos el último 0. Veamos el código.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;moveZeroes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;flag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;En nuestra función utilizamos la variable flag como el puntero que nos indica en donde pusimos el último 0.&lt;/p&gt;
+
+&lt;p&gt;Como ejercicio extra pueden modificar la función para que los &lt;em&gt;0s&lt;/em&gt; no se pongan al principio, sino al final del arreglo y por qué no, que los elementos que no sean &lt;em&gt;0s&lt;/em&gt;, mantengan su orden.&lt;/p&gt;
+
+&lt;p&gt;Este ejercicio (con las modificaciones propuestas) lo pueden encontrar en LeetCode.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://leetcode.com/problems/move-zeroes/&quot;&gt;Move Zeroes&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>LeetCode</title>
+   <link href="http://joseluishernandez.me/2016/06/13/leetcode/"/>
+   <updated>2016-06-13T00:00:00-05:00</updated>
+   <id>http://joseluishernandez.me/2016/06/13/leetcode</id>
+   <content type="html">&lt;p&gt;La mayoría de los desarrolladores nos hemos enfrentado o nos enfrentaremos a las entrevistas técnicas para poder conseguir un puesto en alguna compañía, es parte del proceso de selección de un buen desarrollador y aunque existen diferentes tipos de éstas, como preguntas verbales sobre algun lenguaje en específico, hacer alguna función requerida para el puesto, etc., en muchas ocasiones nos enfrentaremos a entrevistas que involucren resolución de problemas algorítmicos.&lt;/p&gt;
+
+&lt;p&gt;Empresas grandes como Google, Facebook o Twitter hacen mucho enfasis en esto ya que para ellos los desarrolladores que entiendan los algoritmos, sus complejidades y sus espacios, son fundamentales para sus equipos. Ahorrar 5 milisegundos de tiempo o 1 byte de espacio es esencial en las tareas que se ejecutan por millones cada segundo en sus servidores.&lt;/p&gt;
+
+&lt;p&gt;Esto nos lleva a que muchos de nosotros saliendo de la universidad pocas veces nos enfrentamos a estos problemas, mayormente porque implementar este tipo de soluciones requieren tiempo y a veces empresas prefieren una solución rápida que una bien hecha :( . Es por eso que cuando queremos aplicar a empresas donde requieren este tipo de conocimientos puede que se nos complique.&lt;/p&gt;
+
+&lt;p&gt;Por suerte existen sitios como LeetCode. ¿Qué es LeetCode? Según su página:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;LeetCode es una plataforma para prepararse para entrevistas técnicas de código. Puedes escoger entre mas de 190 preguntas, codificarlas y hacer pruebas para ver si tu solución es correcta. Soporta 9 lenguajes: C, C++, Java, Python, C#, JavaScript, Ruby, Bash, MySQL.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Existe una versión gratuita y una de paga, en la gratuita, que es mas que suficiente para practicar, hay algunos problemas bloqueados, además de que no puedes consultar la solución del problema. En fin, aquí les dejo la página para que entren y empiecen a practicar.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://leetcode.com/&quot;&gt;leetcode.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;En artículos posteriores resolveremos algunos de los problemas que ahí podemos encontrar, explicando paso a paso la solución, así como la complejidad en tiempo y espacio de cada algoritmo.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>Gradle por favor</title>
    <link href="http://joseluishernandez.me/2015/01/19/gradle-please/"/>
    <updated>2015-01-19T00:00:00-06:00</updated>
    <id>http://joseluishernandez.me/2015/01/19/gradle-please</id>
-   <content type="html">&lt;h2&gt;Gradle Please&lt;/h2&gt;
-
-&lt;p&gt;Si eres un desarrollador de Android o Java, usas Gradle (deberías) y quieres agregar una dependencia a tu proyecto pero no sabes el nombre calificado de esta, la siguiente herramienta es para ti.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Si eres un desarrollador de Android o Java, usas Gradle (deberías) y quieres agregar una dependencia a tu proyecto pero no sabes el nombre calificado de esta, la siguiente herramienta es para ti.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://gradleplease.appspot.com/&quot;&gt;Gradle Please&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Usando el repositorio de Maven, con solo poner el nombre de la librería que queremos agregar nos da la línea que necesitamos incluir en nuestro archivo de configuración de Gradle, así de fácil.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/example_gradleplease.png&quot; alt=&quot;placeholder&quot; title=&quot;Example&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/example_gradleplease.png&quot; alt=&quot;placeholder&quot; title=&quot;Example&quot; /&gt;&lt;/p&gt;
 </content>
  </entry>
  
@@ -34,15 +110,13 @@
    <link href="http://joseluishernandez.me/2015/01/16/primer-entrada/"/>
    <updated>2015-01-16T00:00:00-06:00</updated>
    <id>http://joseluishernandez.me/2015/01/16/primer-entrada</id>
-   <content type="html">&lt;h2&gt;¿De qué va esto?&lt;/h2&gt;
+   <content type="html">&lt;h2 id=&quot;de-qué-va-esto&quot;&gt;¿De qué va esto?&lt;/h2&gt;
 
 &lt;p&gt;Mi nombre es José Luis, soy mexicano y soy desarrollador de software especializado en web y dispositivos móviles. Aquí encontrarás una pequeña muestra de lo que hago día con día y que amo hacer, desarrollar soluciones basadas en software.&lt;/p&gt;
 
-&lt;h2&gt;¿En español?&lt;/h2&gt;
+&lt;h2 id=&quot;en-español&quot;&gt;¿En español?&lt;/h2&gt;
 
 &lt;p&gt;Sí, aunque considero el idioma inglés como un requisito indispensable para llegar más lejos, no sólo profesional sino personalmente, en mi experiencia, hay un rezago importante de documentación en español, es así que el 99% del contenido de esta página será en este idioma.&lt;/p&gt;
-
-&lt;p&gt;Anyway, as I was saying... broma, broma.&lt;/p&gt;
 
 &lt;p&gt;Ya para finalizar, quiero aclarar que todo lo expresado en está página es opinión personal y en ningún momento expresa la opinión de las empresas para las que trabajo.&lt;/p&gt;
 </content>

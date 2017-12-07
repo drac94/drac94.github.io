@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Pregunta de entrevista (Moviendo ceros) &middot; José Luis Hernández
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/font-awesome.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700|Fjalla+One">
+
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="social-links">
+      <ul>
+        <li><a href="https://twitter.com/drac94"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="http://mx.linkedin.com/in/drac94"><i class="fa fa-linkedin"></i></a></li>
+        <li><a href="https://github.com/drac94"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://www.flickr.com/photos/drac94/"><i class="fa fa-flickr"></i></a></li>
+      </ul>
+    </div>
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          José Luis Hernández
+        </a>
+      </h1>
+      <p class="lead">You think development is your ally, but you merely adopted the code. I was born in it, molded by it. Until I was already a man, it was nothing to me but coding.</p>
+    </div>
+
+    <p>&copy; 2017. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Pregunta de entrevista (Moviendo ceros)</h1>
+  <span class="post-date">15 Jun 2016</span>
+  <p>Hoy vamos a escribir una función que mueva los <em>0s</em> de un array al principio del mismo, y que mantenga los demás valores sin importar el orden de estos.
+Esta es una pregunta real que me tocó resolver en alguna entrevista, como tip, les puedo decir que primero tratemos de resolverlo con la primera forma que se nos venga a la mente y de ahí lo vayamos optimizando.</p>
+
+<p>Ejemplo:</p>
+
+<p><code class="highlighter-rouge">[2,-12,0,7,0,-99] =&gt; [0,0,2,-12,7,-99]</code></p>
+
+<p>Nuestro arreglo final debería de tener 2 <em>0s</em> al principio y los demas elementos al final, no importando el orden de estos.</p>
+
+<p>Entonces la primer solución que podríamos implementar es crear otro arreglo, recorrer el arreglo original y por cada 0 que encontremos lo metemos en el arreglo nuevo, después volvemos a recorrer el arreglo original y los que no son <em>0s</em>, los metemos después del índice en el que nos quedamos cuando metimos los <em>0s</em>.</p>
+
+<p>Esta solución si bien soluciona nuestro problema tiene una complejidad de tiempo de <strong>O(n)</strong>, es decir, tenemos que recorrer el arreglo original 2 veces, y una complejidad de espacio de <strong>O(n)</strong> también, porque tenemos que crear otro arreglo para guardar el resultado.</p>
+
+<p>Pero puede que se de el caso de que nos pidan que la complejidad tanto en tiempo y espacio sea <strong>O(1)</strong>, entonces tenemos que buscar otra solución.</p>
+
+<p>Sabemos que el orden de los elementos que no sean <em>0s</em> no importa, así que podemos recorrer el arreglo y cuando encontremos un 0, tenemos que intencambiarlo por el primer valor que no sea 0 empezando desde el principio del arreglo. En nuestro ejemplo, el primer 0 es el de la tercera posición, y el primer valor que no es 0 empezando desde el principio, es el primero, que es 2, entonces procedemos a intercambiarlos, lo que nos daría el siguiente arreglo <code class="highlighter-rouge">[0,-12,2,7,0,-99]</code>, con esto sabemos que la posición en donde pusimos el 0 podemos omitirla cuando encontremos otro 0, para esto podemos usar una variable que nos sirva como puntero y que nos indique donde pusimos el último 0. Veamos el código.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">moveZeroes</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span> <span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">flag</span><span class="o">];</span>
+            <span class="n">a</span><span class="o">[</span><span class="n">flag</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="n">flag</span><span class="o">++;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>En nuestra función utilizamos la variable flag como el puntero que nos indica en donde pusimos el último 0.</p>
+
+<p>Como ejercicio extra pueden modificar la función para que los <em>0s</em> no se pongan al principio, sino al final del arreglo y por qué no, que los elementos que no sean <em>0s</em>, mantengan su orden.</p>
+
+<p>Este ejercicio (con las modificaciones propuestas) lo pueden encontrar en LeetCode.</p>
+
+<p><a href="https://leetcode.com/problems/move-zeroes/">Move Zeroes</a></p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2017/12/07/test/">
+            This is a test
+            <small>07 Dec 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2016/06/13/leetcode/">
+            LeetCode
+            <small>13 Jun 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/01/19/gradle-please/">
+            Gradle por favor
+            <small>19 Jan 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>
