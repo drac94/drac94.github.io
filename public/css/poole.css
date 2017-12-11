@@ -559,11 +559,6 @@ html {
 .sidebar {
   text-align: center;
   padding: 2rem 1rem;
-  color: rgba(255,255,255,.5);
-  background: -webkit-linear-gradient(#6a9fb5, #166484);
-  background: -o-linear-gradient(#6a9fb5, #166484);
-  background: -moz-linear-gradient(#6a9fb5, #166484);
-  background: linear-gradient(#6a9fb5, #166484);
 }
 @media (min-width: 48em) {
   .sidebar {

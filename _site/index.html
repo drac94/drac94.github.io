@@ -34,7 +34,7 @@
 </head>
 
 
-  <body class="theme-base-08">
+  <body class="theme-base-09">
 
     <div class="sidebar">
   <div class="container sidebar-sticky">
@@ -61,6 +61,123 @@
 
     <div class="content container">
       <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2016/06/15/zeros/">
+        Pregunta de entrevista (Moviendo ceros)
+      </a>
+    </h1>
+
+    <span class="post-date">15 Jun 2016</span>
+
+    <p>Hoy vamos a escribir una función que mueva los <em>0s</em> de un array al principio del mismo, y que mantenga los demás valores sin importar el orden de estos.
+Esta es una pregunta real que me tocó resolver en alguna entrevista, como tip, les puedo decir que primero tratemos de resolverlo con la primera forma que se nos venga a la mente y de ahí lo vayamos optimizando.</p>
+
+<p>Ejemplo:</p>
+
+<p><code class="highlighter-rouge">[2,-12,0,7,0,-99] =&gt; [0,0,2,-12,7,-99]</code></p>
+
+<p>Nuestro arreglo final debería de tener 2 <em>0s</em> al principio y los demas elementos al final, no importando el orden de estos.</p>
+
+<p>Entonces la primer solución que podríamos implementar es crear otro arreglo, recorrer el arreglo original y por cada 0 que encontremos lo metemos en el arreglo nuevo, después volvemos a recorrer el arreglo original y los que no son <em>0s</em>, los metemos después del índice en el que nos quedamos cuando metimos los <em>0s</em>.</p>
+
+<p>Esta solución si bien soluciona nuestro problema tiene una complejidad de tiempo de <strong>O(n)</strong>, es decir, tenemos que recorrer el arreglo original 2 veces, y una complejidad de espacio de <strong>O(n)</strong> también, porque tenemos que crear otro arreglo para guardar el resultado.</p>
+
+<p>Pero puede que se de el caso de que nos pidan que la complejidad tanto en tiempo y espacio sea <strong>O(1)</strong>, entonces tenemos que buscar otra solución.</p>
+
+<p>Sabemos que el orden de los elementos que no sean <em>0s</em> no importa, así que podemos recorrer el arreglo y cuando encontremos un 0, tenemos que intencambiarlo por el primer valor que no sea 0 empezando desde el principio del arreglo. En nuestro ejemplo, el primer 0 es el de la tercera posición, y el primer valor que no es 0 empezando desde el principio, es el primero, que es 2, entonces procedemos a intercambiarlos, lo que nos daría el siguiente arreglo <code class="highlighter-rouge">[0,-12,2,7,0,-99]</code>, con esto sabemos que la posición en donde pusimos el 0 podemos omitirla cuando encontremos otro 0, para esto podemos usar una variable que nos sirva como puntero y que nos indique donde pusimos el último 0. Veamos el código.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">moveZeroes</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span> <span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">flag</span><span class="o">];</span>
+            <span class="n">a</span><span class="o">[</span><span class="n">flag</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="n">flag</span><span class="o">++;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>En nuestra función utilizamos la variable flag como el puntero que nos indica en donde pusimos el último 0.</p>
+
+<p>Como ejercicio extra pueden modificar la función para que los <em>0s</em> no se pongan al principio, sino al final del arreglo y por qué no, que los elementos que no sean <em>0s</em>, mantengan su orden.</p>
+
+<p>Este ejercicio (con las modificaciones propuestas) lo pueden encontrar en LeetCode.</p>
+
+<p><a href="https://leetcode.com/problems/move-zeroes/">Move Zeroes</a></p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2016/06/13/leetcode/">
+        LeetCode
+      </a>
+    </h1>
+
+    <span class="post-date">13 Jun 2016</span>
+
+    <p>La mayoría de los desarrolladores nos hemos enfrentado o nos enfrentaremos a las entrevistas técnicas para poder conseguir un puesto en alguna compañía, es parte del proceso de selección de un buen desarrollador y aunque existen diferentes tipos de éstas, como preguntas verbales sobre algun lenguaje en específico, hacer alguna función requerida para el puesto, etc., en muchas ocasiones nos enfrentaremos a entrevistas que involucren resolución de problemas algorítmicos.</p>
+
+<p>Empresas grandes como Google, Facebook o Twitter hacen mucho enfasis en esto ya que para ellos los desarrolladores que entiendan los algoritmos, sus complejidades y sus espacios, son fundamentales para sus equipos. Ahorrar 5 milisegundos de tiempo o 1 byte de espacio es esencial en las tareas que se ejecutan por millones cada segundo en sus servidores.</p>
+
+<p>Esto nos lleva a que muchos de nosotros saliendo de la universidad pocas veces nos enfrentamos a estos problemas, mayormente porque implementar este tipo de soluciones requieren tiempo y a veces empresas prefieren una solución rápida que una bien hecha :( . Es por eso que cuando queremos aplicar a empresas donde requieren este tipo de conocimientos puede que se nos complique.</p>
+
+<p>Por suerte existen sitios como LeetCode. ¿Qué es LeetCode? Según su página:</p>
+
+<blockquote>
+  <p>LeetCode es una plataforma para prepararse para entrevistas técnicas de código. Puedes escoger entre mas de 190 preguntas, codificarlas y hacer pruebas para ver si tu solución es correcta. Soporta 9 lenguajes: C, C++, Java, Python, C#, JavaScript, Ruby, Bash, MySQL.</p>
+</blockquote>
+
+<p>Existe una versión gratuita y una de paga, en la gratuita, que es mas que suficiente para practicar, hay algunos problemas bloqueados, además de que no puedes consultar la solución del problema. En fin, aquí les dejo la página para que entren y empiecen a practicar.</p>
+
+<p><a href="https://leetcode.com/">leetcode.com</a></p>
+
+<p>En artículos posteriores resolveremos algunos de los problemas que ahí podemos encontrar, explicando paso a paso la solución, así como la complejidad en tiempo y espacio de cada algoritmo.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2015/01/19/gradle-please/">
+        Gradle por favor
+      </a>
+    </h1>
+
+    <span class="post-date">19 Jan 2015</span>
+
+    <p>Si eres un desarrollador de Android o Java, usas Gradle (deberías) y quieres agregar una dependencia a tu proyecto pero no sabes el nombre calificado de esta, la siguiente herramienta es para ti.</p>
+
+<p><a href="http://gradleplease.appspot.com/">Gradle Please</a></p>
+
+<p>Usando el repositorio de Maven, con solo poner el nombre de la librería que queremos agregar nos da la línea que necesitamos incluir en nuestro archivo de configuración de Gradle, así de fácil.</p>
+
+<p><img src="/images/example_gradleplease.png" alt="placeholder" title="Example" /></p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2015/01/16/primer-entrada/">
+        Bienvenid@
+      </a>
+    </h1>
+
+    <span class="post-date">16 Jan 2015</span>
+
+    <h2 id="de-qué-va-esto">¿De qué va esto?</h2>
+
+<p>Mi nombre es José Luis, soy mexicano y soy desarrollador de software especializado en web y dispositivos móviles. Aquí encontrarás una pequeña muestra de lo que hago día con día y que amo hacer, desarrollar soluciones basadas en software.</p>
+
+<h2 id="en-español">¿En español?</h2>
+
+<p>Sí, aunque considero el idioma inglés como un requisito indispensable para llegar más lejos, no sólo profesional sino personalmente, en mi experiencia, hay un rezago importante de documentación en español, es así que el 99% del contenido de esta página será en este idioma.</p>
+
+<p>Ya para finalizar, quiero aclarar que todo lo expresado en está página es opinión personal y en ningún momento expresa la opinión de las empresas para las que trabajo.</p>
+
+  </div>
   
 </div>
 
