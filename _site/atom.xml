@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Luis Guerrero</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2019-10-17T23:20:34-05:00</updated>
- <id>http://localhost:4000</id>
+ <link href="https://joseluishdz.com/atom.xml" rel="self"/>
+ <link href="https://joseluishdz.com/"/>
+ <updated>2019-10-17T23:31:27-05:00</updated>
+ <id>https://joseluishdz.com</id>
  <author>
    <name>Mark Otto</name>
    <email></email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Configuring Visual Studio Code to compile C and C++ code</title>
-   <link href="http://localhost:4000/2019/10/17/VSC/"/>
+   <link href="https://joseluishdz.com/2019/10/17/VSC/"/>
    <updated>2019-10-17T00:00:00-05:00</updated>
-   <id>http://localhost:4000/2019/10/17/VSC</id>
+   <id>https://joseluishdz.com/2019/10/17/VSC</id>
    <content type="html">&lt;p&gt;Some days ago a friend of mine asked me to recommend her an IDE to compile and run C and C++ code. And how I recently fell in love with Visual Studio Code, that was obviously my recommendation. But then I remembered that I had many years without coding on those languages and I had no idea if that was possible since VSC is not strictly an IDE but a Code Editor, and that’s how this post was born, looking for answers.&lt;/p&gt;
 
 &lt;p&gt;Disclaimer:
