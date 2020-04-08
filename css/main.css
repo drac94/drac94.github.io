@@ -337,6 +337,7 @@ p {
   border-style: solid;
   border-color: rgba(255, 255, 255, 0.14);
   margin: 13.5px;
+  cursor: pointer;
 }
 
 .icon img {
